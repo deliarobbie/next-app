@@ -1,32 +1,22 @@
 import { notFound } from "next/navigation";
+import { getTeams } from "@/app/lib/nfl";
 
-interface Team {
-    id: string;
-    name: string;
-    alias: string;
-    logo: string;
-}
-
-async function getTeam(alias: string): Promise<Team | null> {
-    try {
-        const res = await fetch(
-            `${process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000"}/api/nfl`,
-            { cache: "no-store" }
-        );
-        if (!res.ok) return null;
-        const teams: Team[] = await res.json();
-        return teams.find((t) => t.alias.toLowerCase() === alias.toLowerCase()) ?? null;
-    } catch {
-        return null;
-    }
-}
-
-export default async function TeamPage({ params }: { params: Promise<{ alias: string }> }) {
+export default async function TeamPage({
+    params,
+}: {
+    params: Promise<{ alias: string }>;
+}) {
     const { alias } = await params;
-    const team = await getTeam(alias);
+
+    const teams = await getTeams();
+
+    const team =
+        teams.find(
+            (t: any) =>
+                t.alias.toLowerCase() === alias.toLowerCase()
+        ) ?? null;
 
     if (!team) notFound();
-
     return (
         <main className="team-page">
             <div className="grid-bg" />
