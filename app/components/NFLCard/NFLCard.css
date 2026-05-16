@@ -1,0 +1,54 @@
+.nfl-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 20px;
+    width: 220px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+
+    cursor: pointer;
+}
+
+.nfl-card:hover {
+    transform: translateY(-4px);
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.nfl-card img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+}
+
+.nfl-card h2 {
+    margin: 0;
+
+    font-size: 1.1rem;
+    text-align: center;
+
+    color: #111827;
+}
+
+.nfl-card p {
+    margin: 0;
+
+    color: #6b7280;
+
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.nfl-card a {
+    text-decoration: none;
+    color: inherit;
+}
